@@ -1,0 +1,29 @@
+/* =Global
+----------------------------------------------- */
+
+/* border box all the things */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+/* Alignment */
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: $vspacing;
+}
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: $vspacing;
+}
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+}
+
+/* Text meant only for screen readers */
+.assistive-text {
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+}

@@ -1,0 +1,27 @@
+/* =Content
+----------------------------------------------- */
+
+.sticky {
+}
+.hentry {
+	margin: 0 0 $vspacing;
+}
+.entry-meta {
+	clear: both;
+}
+.byline {
+	display: none;
+}
+.single, .group-blog {
+	.byline {
+		display: inline;
+	}
+}
+.entry-content,
+.entry-summary {
+	margin: $vspacing 0 0;
+}
+.page-links {
+	clear: both;
+	margin: 0 0 $vspacing;
+}
