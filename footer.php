@@ -10,7 +10,7 @@
 
 	</div><!-- #main -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
+	<footer id="colophon" class="site-footer grid" role="contentinfo">
 		<div class="site-info">
 			<?php do_action( 'wpseattle_credits' ); ?>
 			<a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'wpseattle' ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s', 'wpseattle' ), 'WordPress' ); ?></a>
