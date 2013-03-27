@@ -8,6 +8,9 @@
  */
 ?>
 
+	<?php //get sidebar primary
+	get_sidebar( 'primary' ); // Loads the sidebar-primary.php template. ?>
+	
 	</div><!-- #main -->
 
 	<footer id="colophon" class="site-footer grid" role="contentinfo">

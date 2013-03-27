@@ -6,9 +6,10 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<h1 class="entry-title"><?php the_title(); ?></h1>
+<article id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
+
+<header class="entry-header">
+	<?php echo apply_atomic_shortcode( 'entry_title', the_title( '<h1 class="entry-title">', '</h1>', false ) ); ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">

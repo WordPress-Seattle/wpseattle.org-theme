@@ -16,6 +16,12 @@ if ( ! isset( $content_width ) )
  */
 require( get_template_directory() . '/inc/jetpack.php' );
 
+
+/* Load the Hybrid core theme framework. */
+require_once( trailingslashit( get_template_directory() ) . 'lib/hybrid.php' );
+new Hybrid();
+
+
 if ( ! function_exists( 'wpseattle_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -48,84 +54,41 @@ function wpseattle_setup() {
 	 * to change 'wpseattle' to the name of your theme in all the template files
 	 */
 	load_theme_textdomain( 'wpseattle', get_template_directory() . '/languages' );
-
+	
 	/**
-	 * Add default posts and comments RSS feed links to head
+	 * Hybrid Core Setup
 	 */
-	add_theme_support( 'automatic-feed-links' );
+	/* Get action/filter hook prefix. */
+		$prefix = hybrid_get_prefix();
 
-	/**
-	 * Enable support for Post Thumbnails
-	 */
-	add_theme_support( 'post-thumbnails' );
+		/* Add theme support for core framework features. */
+		add_theme_support( 'hybrid-core-menus', array( 'primary' ) );
+		add_theme_support( 'hybrid-core-sidebars', array( 'primary' ) );
+		add_theme_support( 'hybrid-core-widgets' );
+		add_theme_support( 'hybrid-core-shortcodes' );
+		add_theme_support( 'hybrid-core-template-hierarchy' );
+		add_theme_support( 'hybrid-core-styles', array( 'style' ) );
 
-	/**
-	 * This theme uses wp_nav_menu() in one location.
-	 */
-	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', 'wpseattle' ),
-	) );
+		/* Add theme support for framework extensions. */
+		//add_theme_support( 'theme-layouts', array( '1c', '2c-l', '2c-r' ), array( 'default' => '2c-l' ) );
+		add_theme_support( 'post-stylesheets' );
+		add_theme_support( 'loop-pagination' );
+		add_theme_support( 'get-the-image' );
+		add_theme_support( 'breadcrumb-trail' );
 
-	/**
-	 * Enable support for Post Formats
-	 */
-	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
-}
+		/* Add theme support for WordPress features. */
+		add_theme_support( 'automatic-feed-links' );
+		add_theme_support('post-formats',array( 'aside', 'audio', 'chat', 'image', 'gallery', 'link', 'quote', 'status', 'video' ));
+
+	}
 endif; // wpseattle_setup
 add_action( 'after_setup_theme', 'wpseattle_setup' );
 
-/**
- * Setup the WordPress core custom background feature.
- *
- * Use add_theme_support to register support for WordPress 3.4+
- * as well as provide backward compatibility for WordPress 3.3
- * using feature detection of wp_get_theme() which was introduced
- * in WordPress 3.4.
- *
- * @todo Remove the 3.3 support when WordPress 3.6 is released.
- *
- * Hooks into the after_setup_theme action.
- */
-function wpseattle_register_custom_background() {
-	$args = array(
-		'default-color' => 'ffffff',
-		'default-image' => '',
-	);
-
-	$args = apply_filters( 'wpseattle_custom_background_args', $args );
-
-	if ( function_exists( 'wp_get_theme' ) ) {
-		add_theme_support( 'custom-background', $args );
-	} else {
-		define( 'BACKGROUND_COLOR', $args['default-color'] );
-		if ( ! empty( $args['default-image'] ) )
-			define( 'BACKGROUND_IMAGE', $args['default-image'] );
-		add_custom_background();
-	}
-}
-add_action( 'after_setup_theme', 'wpseattle_register_custom_background' );
-
-/**
- * Register widgetized area and update sidebar with default widgets
- */
-function wpseattle_widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'wpseattle' ),
-		'id'            => 'sidebar-1',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
-	) );
-}
-add_action( 'widgets_init', 'wpseattle_widgets_init' );
 
 /**
  * Enqueue scripts and styles
  */
 function wpseattle_scripts() {
-	wp_enqueue_style( 'WP Seattle-style', get_stylesheet_uri() );
-
 	wp_enqueue_script( 'WP Seattle-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
 	wp_enqueue_script( 'WP Seattle-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );

@@ -15,7 +15,9 @@ get_header(); ?>
 
 	<div id="primary" class="content-area col-3-4">
 		<div id="content" class="site-content" role="main">
-
+		<!-- Add Breadcrumb Trails --> 
+		<?php if ( current_theme_supports( 'breadcrumb-trail' ) ) breadcrumb_trail( array( 'container' => 'nav', 'separator' => '>', 'before' => __( 'You are here:', 'wpseattle' ) ) ); ?>
+		
 		<?php if ( have_posts() ) : ?>
 
 			<?php /* Start the Loop */ ?>
@@ -42,5 +44,4 @@ get_header(); ?>
 		</div><!-- #content -->
 	</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
